@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Superior Restaurant — Almonte, Ontario</title>
+  <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Permanent+Marker&family=Lato:wght@300;400;700&family=Special+Elite&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --red:    #C8102E;
+      --cream:  #FDF5E0;
+      --yellow: #F5C518;
+      --black:  #1A1008;
+      --brown:  #3B1F0A;
+      --white:  #FFFDF7;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Lato', sans-serif; background: var(--cream); color: var(--black); overflow-x: hidden; }
+
+    /* ── CHECKER BORDER ── */
+    .checker { height: 20px; width: 100%; background-image: repeating-conic-gradient(var(--black) 0% 25%, var(--yellow) 0% 50%); background-size: 20px 20px; }
+    .checker-red { height: 20px; width: 100%; background-image: repeating-conic-gradient(var(--red) 0% 25%, var(--black) 0% 50%); background-size: 20px 20px; }
+
+    /* ── NAV ── */
+    nav { background: var(--red); position: sticky; top: 0; z-index: 100; box-shadow: 0 4px 0 var(--black); }
+    .nav-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 0 2rem; height: 60px; }
+    .nav-logo { font-family: 'Abril Fatface', serif; color: var(--yellow); font-size: 1.4rem; letter-spacing: 2px; text-decoration: none; text-shadow: 2px 2px 0 var(--black); }
+    nav ul { list-style: none; display: flex; gap: 1.8rem; }
+    nav ul li a { font-family: 'Special Elite', cursive; color: var(--white); text-decoration: none; font-size: 0.9rem; letter-spacing: 1px; transition: color 0.2s; }
+    nav ul li a:hover { color: var(--yellow); }
+    @media (max-width: 600px) { nav ul { display: none; } }
+
+    /* ── HERO ── */
+    .hero { background: var(--black); position: relative; overflow: hidden; min-height: 92vh; display: flex; align-items: center; justify-content: center; text-align: center; }
+    .hero::before { content: ''; position: absolute; inset: 0; background-image: radial-gradient(circle, rgba(245,197,24,0.07) 1px, transparent 1px); background-size: 18px 18px; pointer-events: none; }
+    .hero-content { position: relative; z-index: 2; padding: 2rem; animation: fadeUp 1s ease both; }
+    @keyframes fadeUp { from { opacity:0; transform:translateY(40px); } to { opacity:1; transform:translateY(0); } }
+    .hero-eyebrow { font-family: 'Special Elite', cursive; color: var(--yellow); letter-spacing: 6px; font-size: 0.85rem; margin-bottom: 1rem; text-transform: uppercase; }
+    .hero h1 { font-family: 'Abril Fatface', serif; color: var(--white); font-size: clamp(3.5rem, 10vw, 7rem); line-height: 1; text-shadow: 5px 5px 0 var(--red); margin-bottom: 0.5rem; }
+    .hero h1 span { color: var(--yellow); }
+    .hero-tagline { font-family: 'Permanent Marker', cursive; color: var(--yellow); font-size: clamp(1rem, 3vw, 1.5rem); margin: 1.2rem 0 2rem; }
+    .hero-badges { display: flex; gap: 0.8rem; justify-content: center; flex-wrap: wrap; margin-bottom: 2.5rem; }
+    .badge { background: var(--red); color: var(--white); font-family: 'Special Elite', cursive; font-size: 0.72rem; letter-spacing: 2px; padding: 6px 14px; border: 2px solid var(--yellow); text-transform: uppercase; }
+    .hero-cta { display: inline-block; background: var(--yellow); color: var(--black); font-family: 'Abril Fatface', serif; font-size: 1.1rem; padding: 14px 42px; text-decoration: none; border: 3px solid var(--black); box-shadow: 5px 5px 0 var(--red); transition: transform 0.15s, box-shadow 0.15s; letter-spacing: 1px; }
+    .hero-cta:hover { transform: translate(-3px,-3px); box-shadow: 8px 8px 0 var(--red); }
+    .hero-since { font-family: 'Special Elite', cursive; color: rgba(255,255,255,0.3); font-size: 0.78rem; margin-top: 2rem; letter-spacing: 4px; }
+    /* Vinyl */
+    .vinyl { position: absolute; right: -100px; top: 50%; transform: translateY(-50%); width: 400px; height: 400px; border-radius: 50%; background: conic-gradient(#111 0 10deg,#222 10deg 20deg,#111 20deg 30deg,#222 30deg 40deg,#111 40deg 50deg,#222 50deg 60deg,#111 60deg 70deg,#222 70deg 80deg,#111 80deg 90deg,#222 90deg 100deg,#111 100deg 110deg,#222 110deg 120deg,#111 120deg 180deg,#222 180deg 240deg,#111 240deg 300deg,#222 300deg 360deg); border: 6px solid #333; opacity: 0.35; animation: spin 25s linear infinite; }
+    .vinyl::after { content:''; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:90px; height:90px; border-radius:50%; background:var(--red); border:4px solid #111; }
+    @keyframes spin { to { transform: translateY(-50%) rotate(360deg); } }
+    @media (max-width:700px) { .vinyl { display:none; } }
+
+    /* ── INFO STRIP ── */
+    .info-strip { background: var(--red); }
+    .info-grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); padding: 36px 2rem; gap: 1.5rem; }
+    .info-card { text-align: center; color: var(--white); }
+    .info-card .icon { font-size: 2rem; margin-bottom: 0.5rem; }
+    .info-card h3 { font-family: 'Abril Fatface', serif; font-size: 0.95rem; color: var(--yellow); margin-bottom: 0.25rem; letter-spacing: 1px; }
+    .info-card p { font-family: 'Special Elite', cursive; font-size: 0.82rem; line-height: 1.5; opacity: 0.9; }
+
+    /* ── SECTION SHARED ── */
+    section { padding: 70px 2rem; }
+    .section-inner { max-width: 1100px; margin: 0 auto; }
+    .section-label { font-family: 'Special Elite', cursive; color: var(--red); letter-spacing: 5px; font-size: 0.78rem; text-transform: uppercase; margin-bottom: 0.4rem; }
+    .section-title { font-family: 'Abril Fatface', serif; font-size: clamp(2rem, 5vw, 3rem); line-height: 1.1; margin-bottom: 1.5rem; }
+
+    /* ── ABOUT ── */
+    #about { background: var(--white); }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+    @media (max-width:720px) { .about-grid { grid-template-columns: 1fr; } }
+    .about-text p { font-size: 1.02rem; line-height: 1.8; color: var(--brown); margin-bottom: 1.1rem; }
+    .about-stamp { display: inline-block; border: 4px solid var(--red); color: var(--red); font-family: 'Abril Fatface', serif; font-size: 1.2rem; padding: 10px 22px; transform: rotate(-4deg); margin-top: 1rem; letter-spacing: 2px; }
+    .diner-scene { width: 100%; border: 5px solid var(--black); box-shadow: 10px 10px 0 var(--yellow); aspect-ratio: 4/3; overflow: hidden; }
+    .diner-scene svg { width: 100%; height: 100%; }
+
+    /* ── TICKER ── */
+    .ticker { background: var(--yellow); border-top: 3px solid var(--black); border-bottom: 3px solid var(--black); overflow: hidden; white-space: nowrap; padding: 10px 0; }
+    .ticker-inner { display: inline-block; animation: ticker 30s linear infinite; font-family: 'Special Elite', cursive; font-size: 0.9rem; letter-spacing: 2px; color: var(--black); }
+    .ticker-inner span { margin: 0 2.5rem; }
+    .ticker-inner span::before { content: '★  '; color: var(--red); }
+    @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+    /* ── MENU ── */
+    #menu { background: var(--cream); }
+
+    /* Tabs: single scrollable row, never wraps */
+    .menu-tabs-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; margin-bottom: 2.5rem; }
+    .menu-tabs { display: flex; flex-wrap: nowrap; width: max-content; border: 3px solid var(--black); overflow: hidden; }
+    .menu-tab { font-family: 'Special Elite', cursive; background: var(--white); color: var(--black); border: none; padding: 13px 26px; cursor: pointer; font-size: 0.88rem; letter-spacing: 1.5px; white-space: nowrap; transition: background 0.2s, color 0.2s; border-right: 3px solid var(--black); }
+    .menu-tab:last-child { border-right: none; }
+    .menu-tab.active, .menu-tab:hover { background: var(--red); color: var(--yellow); }
+    .menu-section { display: none; }
+    .menu-section.active { display: block; }
+
+    /* Menu category blocks */
+    .menu-category { margin-bottom: 3rem; }
+    .menu-category-title { font-family: 'Abril Fatface', serif; font-size: 1.5rem; color: var(--red); border-bottom: 3px solid var(--black); padding-bottom: 0.5rem; margin-bottom: 1.2rem; display: flex; align-items: center; gap: 0.6rem; }
+    .menu-sub { font-family: 'Special Elite', cursive; color: var(--brown); font-size: 0.78rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 1rem; margin-top: 0.2rem; opacity: 0.7; }
+
+    /* Items: two fixed columns on desktop, one on mobile — no auto-fill orphan gaps */
+    .menu-items { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0; }
+    @media (max-width: 680px) { .menu-items { grid-template-columns: 1fr; } }
+
+    /* Every item has full borders; collapse so shared edges don't double up */
+    .menu-item {
+      background: var(--white);
+      border: 2px solid var(--black);
+      margin: 0 -1px -1px 0; /* collapse trick — overlap borders */
+      padding: 0.9rem 1.1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      transition: background 0.15s;
+    }
+    .menu-item:hover { background: #fffbf0; }
+    .menu-items { border: 2px solid var(--black); } /* outer frame */
+    .menu-item { border: none; border-bottom: 1.5px solid rgba(26,16,8,0.12); border-right: 1.5px solid rgba(26,16,8,0.12); }
+    /* Remove right border on every second child (last column) */
+    .menu-item:nth-child(2n) { border-right: none; }
+    /* Remove bottom border on last row */
+    .menu-item:last-child { border-bottom: none; }
+    .menu-item:nth-last-child(2):nth-child(odd) { border-bottom: none; }
+
+    .menu-item-left { flex: 1; min-width: 0; }
+    .menu-item-name { font-family: 'Abril Fatface', serif; font-size: 0.97rem; line-height: 1.25; margin-bottom: 0.2rem; }
+    .menu-item-desc { font-size: 0.78rem; color: var(--brown); line-height: 1.4; font-style: italic; }
+    .menu-item-tag { display: inline-block; background: var(--yellow); color: var(--black); font-family: 'Special Elite', cursive; font-size: 0.58rem; padding: 1px 5px; margin-left: 5px; letter-spacing: 1px; vertical-align: middle; }
+    .menu-item-right { flex-shrink: 0; text-align: right; }
+    .menu-price { font-family: 'Permanent Marker', cursive; color: var(--red); font-size: 1.05rem; white-space: nowrap; }
+    .menu-price-small { font-size: 0.72rem; color: var(--brown); font-family: 'Special Elite', cursive; display: block; }
+
+    /* Size pricing table */
+    .price-table { font-family: 'Special Elite', cursive; font-size: 0.78rem; color: var(--brown); }
+    .price-table span { display: block; }
+
+    .menu-note { font-family: 'Special Elite', cursive; font-size: 0.8rem; color: var(--brown); opacity: 0.65; margin-top: 1.5rem; }
+
+    /* ── REVIEWS ── */
+    #reviews { background: var(--black); }
+    #reviews .section-title { color: var(--white); }
+    #reviews .section-label { color: var(--yellow); }
+    .rating-overall { text-align: center; margin-bottom: 2.5rem; }
+    .rating-number { font-family: 'Abril Fatface', serif; font-size: 4.5rem; color: var(--yellow); line-height: 1; }
+    .rating-stars { color: var(--yellow); font-size: 1.6rem; letter-spacing: 4px; margin: 0.3rem 0; }
+    .rating-sub { font-family: 'Special Elite', cursive; color: rgba(255,255,255,0.4); font-size: 0.78rem; letter-spacing: 3px; }
+    .reviews-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.8rem; }
+    .review-card { background: var(--brown); border: 2px solid rgba(245,197,24,0.25); padding: 1.8rem; position: relative; }
+    .review-card::before { content: '"'; font-family: 'Abril Fatface', serif; font-size: 5rem; color: var(--red); position: absolute; top: -10px; left: 14px; line-height: 1; opacity: 0.5; }
+    .review-stars { color: var(--yellow); font-size: 0.9rem; margin-bottom: 0.8rem; letter-spacing: 3px; }
+    .review-text { font-family: 'Special Elite', cursive; color: var(--cream); font-size: 0.88rem; line-height: 1.7; margin-bottom: 1rem; }
+    .review-author { font-family: 'Permanent Marker', cursive; color: var(--yellow); font-size: 0.95rem; }
+    .review-source { font-family: 'Lato', sans-serif; color: rgba(255,255,255,0.3); font-size: 0.68rem; letter-spacing: 2px; margin-top: 2px; text-transform: uppercase; }
+
+    /* ── HOURS & CONTACT ── */
+    #contact { background: var(--cream); }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+    @media (max-width: 720px) { .contact-grid { grid-template-columns: 1fr; } }
+    .hours-table { width: 100%; border-collapse: collapse; font-family: 'Special Elite', cursive; margin-top: 0.8rem; }
+    .hours-table tr { border-bottom: 2px dashed rgba(0,0,0,0.12); }
+    .hours-table td { padding: 9px 0; font-size: 0.92rem; }
+    .hours-table td:last-child { text-align: right; color: var(--red); }
+    .hours-table tr.today td { background: rgba(200,16,46,0.06); padding-left: 4px; }
+    .contact-rows { margin-top: 1rem; }
+    .contact-row { display: flex; align-items: flex-start; gap: 1rem; margin-bottom: 1.4rem; }
+    .c-icon { font-size: 1.4rem; flex-shrink: 0; margin-top: 2px; }
+    .c-detail h4 { font-family: 'Abril Fatface', serif; font-size: 0.95rem; margin-bottom: 2px; }
+    .c-detail p, .c-detail a { font-family: 'Special Elite', cursive; font-size: 0.88rem; color: var(--brown); text-decoration: none; line-height: 1.5; }
+    .c-detail a:hover { color: var(--red); }
+
+    /* Map box — centred */
+    .map-box { margin-top: 2rem; background: var(--black); border: 4px solid var(--black); box-shadow: 8px 8px 0 var(--red); padding: 2.5rem 1.5rem; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 0.6rem; }
+    .map-box .pin { font-size: 2.8rem; }
+    .map-box .map-name { font-family: 'Abril Fatface', serif; font-size: 1.2rem; color: var(--yellow); }
+    .map-box .map-addr { font-family: 'Special Elite', cursive; font-size: 0.85rem; color: rgba(255,255,255,0.65); }
+    .map-box a { display: inline-block; margin-top: 0.6rem; background: var(--yellow); color: var(--black); font-family: 'Abril Fatface', serif; font-size: 0.85rem; padding: 10px 24px; text-decoration: none; border: 2px solid var(--black); box-shadow: 3px 3px 0 var(--red); letter-spacing: 1px; transition: transform 0.15s, box-shadow 0.15s; }
+    .map-box a:hover { transform: translate(-2px,-2px); box-shadow: 5px 5px 0 var(--red); }
+
+    /* ── FOOTER ── */
+    footer { background: var(--red); color: var(--white); text-align: center; padding: 2rem; }
+    .footer-logo { font-family: 'Abril Fatface', serif; font-size: 2rem; color: var(--yellow); text-shadow: 3px 3px 0 rgba(0,0,0,0.3); margin-bottom: 0.4rem; }
+    footer p { font-family: 'Special Elite', cursive; font-size: 0.78rem; opacity: 0.8; letter-spacing: 2px; margin-top: 0.3rem; }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">SUPERIOR</a>
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#menu">Menu</a></li>
+      <li><a href="#reviews">Reviews</a></li>
+      <li><a href="#contact">Hours &amp; Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="vinyl"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">★ Almonte, Ontario — Over 50 Years Strong ★</p>
+    <h1>SUPERIOR<br><span>RESTAURANT</span></h1>
+    <p class="hero-tagline">Real food. Real people. Real good.</p>
+    <div class="hero-badges">
+      <span class="badge">Dine-In</span>
+      <span class="badge">Take-Out</span>
+      <span class="badge">Breakfast All Day</span>
+      <span class="badge">Fully Licensed</span>
+      <span class="badge">Banquet Facilities</span>
+    </div>
+    <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;">
+      <a href="#menu" class="hero-cta">See Our Menu</a>
+      <a href="tel:+16132563954" class="hero-cta" style="background:var(--red); color:var(--white); border-color:var(--yellow); box-shadow:5px 5px 0 var(--yellow);">📞 Call to Order</a>
+    </div>
+    <p class="hero-since">84 MILL STREET · ALMONTE · (613) 256-3954</p>
+  </div>
+</section>
+<div class="checker"></div>
+
+<!-- INFO STRIP -->
+<div class="info-strip">
+  <div class="checker-red"></div>
+  <div class="info-grid">
+    <div class="info-card"><div class="icon">🍕</div><h3>Best Pizza In Town</h3><p>Fresh dough &amp; home-made pizza sauce — Canadian, Special, and more</p></div>
+    <div class="info-card"><div class="icon">🍗</div><h3>Flavour-Crisp Chicken</h3><p>From 2 pieces to 21 — perfect for the whole family</p></div>
+    <div class="info-card"><div class="icon">🍳</div><h3>Breakfast All Day</h3><p>Superior Hungry Man, Breakfast Club, eggs any style</p></div>
+    <div class="info-card"><div class="icon">🥩</div><h3>From the Grill</h3><p>Steaks, chops, brochettes, Greek dishes &amp; seafood</p></div>
+  </div>
+  <div class="checker-red"></div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-inner">
+    <div class="about-grid">
+      <div class="about-text">
+        <p class="section-label">Our Story</p>
+        <h2 class="section-title">Over 50 Years of<br>Home-Style Cooking</h2>
+        <p>Tucked right on Mill Street in the heart of Almonte, Superior Restaurant has been a cornerstone of this community for over half a century. We're not fancy — and that's exactly the point.</p>
+        <p>Pull up a stool at the counter or slide into a booth. You'll find paper placemats, friendly faces, and plates piled high with honest food at honest prices. From all-day breakfast to legendary fried chicken, homemade pizza, Italian specialties, and fresh seafood — every dish comes with the warmth of a place that genuinely cares.</p>
+        <p>Whether you're a local popping in for Tuesday eggs, or a cottage-goer swinging through Lanark Highlands — welcome back. You've been missed.</p>
+        <div class="about-stamp">SINCE THE 1970s</div>
+      </div>
+      <div class="diner-scene">
+        <svg viewBox="0 0 500 375" xmlns="http://www.w3.org/2000/svg">
+          <rect width="500" height="375" fill="#1A1008"/>
+          <rect x="0" y="270" width="500" height="105" fill="#111"/>
+          <!-- checkerboard floor -->
+          <rect x="0" y="270" width="35" height="35" fill="#1e1e1e"/><rect x="70" y="270" width="35" height="35" fill="#1e1e1e"/><rect x="140" y="270" width="35" height="35" fill="#1e1e1e"/><rect x="210" y="270" width="35" height="35" fill="#1e1e1e"/><rect x="280" y="270" width="35" height="35" fill="#1e1e1e"/><rect x="350" y="270" width="35" height="35" fill="#1e1e1e"/><rect x="420" y="270" width="35" height="35" fill="#1e1e1e"/>
+          <rect x="35" y="305" width="35" height="35" fill="#1e1e1e"/><rect x="105" y="305" width="35" height="35" fill="#1e1e1e"/><rect x="175" y="305" width="35" height="35" fill="#1e1e1e"/><rect x="245" y="305" width="35" height="35" fill="#1e1e1e"/><rect x="315" y="305" width="35" height="35" fill="#1e1e1e"/><rect x="385" y="305" width="35" height="35" fill="#1e1e1e"/><rect x="455" y="305" width="35" height="35" fill="#1e1e1e"/>
+          <!-- counter -->
+          <rect x="50" y="200" width="400" height="70" rx="4" fill="#3B1F0A"/>
+          <rect x="50" y="196" width="400" height="12" rx="2" fill="#C8102E"/>
+          <!-- stools -->
+          <ellipse cx="120" cy="270" rx="24" ry="8" fill="#C8102E"/><rect x="116" y="244" width="8" height="26" fill="#C8102E"/>
+          <ellipse cx="200" cy="270" rx="24" ry="8" fill="#C8102E"/><rect x="196" y="244" width="8" height="26" fill="#C8102E"/>
+          <ellipse cx="280" cy="270" rx="24" ry="8" fill="#C8102E"/><rect x="276" y="244" width="8" height="26" fill="#C8102E"/>
+          <ellipse cx="360" cy="270" rx="24" ry="8" fill="#C8102E"/><rect x="356" y="244" width="8" height="26" fill="#C8102E"/>
+          <!-- milkshake -->
+          <rect x="150" y="175" width="18" height="24" rx="2" fill="#FDF5E0" opacity="0.9"/>
+          <ellipse cx="159" cy="175" rx="9" ry="3.5" fill="#F5C518"/>
+          <rect x="157" y="155" width="3" height="22" fill="white" opacity="0.45"/>
+          <!-- neon OPEN -->
+          <rect x="315" y="75" width="135" height="55" rx="6" fill="#C8102E" opacity="0.12" stroke="#F5C518" stroke-width="2"/>
+          <text x="382" y="110" font-family="Georgia,serif" font-size="26" fill="#F5C518" text-anchor="middle" opacity="0.9">OPEN</text>
+          <!-- Elvis frame -->
+          <rect x="55" y="58" width="70" height="100" rx="2" fill="#3B1F0A" stroke="#F5C518" stroke-width="2"/>
+          <ellipse cx="90" cy="95" rx="17" ry="19" fill="#C8102E" opacity="0.45"/>
+          <text x="90" y="144" font-family="Georgia,serif" font-size="9" fill="#F5C518" text-anchor="middle">♪ ELVIS ♪</text>
+          <!-- specials board -->
+          <rect x="170" y="38" width="155" height="90" rx="3" fill="#111" stroke="#F5C518" stroke-width="2"/>
+          <text x="247" y="60" font-family="Georgia,serif" font-size="11" fill="#F5C518" text-anchor="middle">TODAY'S SPECIALS</text>
+          <line x1="190" y1="66" x2="305" y2="66" stroke="#C8102E" stroke-width="1"/>
+          <text x="247" y="80" font-family="sans-serif" font-size="9" fill="white" text-anchor="middle" opacity="0.8">Chicken Parmigiana</text>
+          <text x="247" y="94" font-family="sans-serif" font-size="9" fill="white" text-anchor="middle" opacity="0.8">Twin Chicken Brochette</text>
+          <text x="247" y="108" font-family="sans-serif" font-size="9" fill="white" text-anchor="middle" opacity="0.8">Fish &amp; Chips</text>
+          <!-- stars -->
+          <text x="28" y="48" font-size="20" fill="#F5C518" opacity="0.25">★</text>
+          <text x="460" y="75" font-size="14" fill="#C8102E" opacity="0.35">★</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="checker"></div>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-inner">
+    <span>Homemade Pizza</span><span>Flavour-Crisp Chicken</span><span>Breakfast All Day</span><span>Poutine</span><span>Club Sandwich</span><span>Chicken Parmigiana</span><span>Fish &amp; Chips</span><span>Twin Chicken Brochette</span><span>Sirloin Steak</span><span>Cannelloni</span><span>Homemade Lasagna</span><span>Greek Dishes</span>
+    <span>Homemade Pizza</span><span>Flavour-Crisp Chicken</span><span>Breakfast All Day</span><span>Poutine</span><span>Club Sandwich</span><span>Chicken Parmigiana</span><span>Fish &amp; Chips</span><span>Twin Chicken Brochette</span><span>Sirloin Steak</span><span>Cannelloni</span><span>Homemade Lasagna</span><span>Greek Dishes</span>
+  </div>
+</div>
+
+<!-- MENU -->
+<section id="menu">
+  <div class="section-inner">
+    <p class="section-label">What We Serve</p>
+    <h2 class="section-title">The Menu</h2>
+
+    <div class="menu-tabs-wrap">
+      <div class="menu-tabs">
+        <button class="menu-tab active" onclick="showTab('breakfast',this)">Breakfast</button>
+        <button class="menu-tab" onclick="showTab('appetizers',this)">Starters &amp; Sandwiches</button>
+        <button class="menu-tab" onclick="showTab('pizza',this)">Pizza</button>
+        <button class="menu-tab" onclick="showTab('italian',this)">Italian</button>
+        <button class="menu-tab" onclick="showTab('grill',this)">Grill &amp; Mains</button>
+        <button class="menu-tab" onclick="showTab('chicken',this)">Chicken</button>
+      </div>
+    </div>
+
+    <!-- BREAKFAST -->
+    <div class="menu-section active" id="breakfast">
+      <div class="menu-category">
+        <div class="menu-category-title"><span class="cat-icon">☕</span> Starters</div>
+        <div class="menu-items">
+          <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Coffee or Tea</div></div><div class="menu-item-right"><div class="menu-price">$2.65</div></div></div>
+          <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Decaf Coffee</div></div><div class="menu-item-right"><div class="menu-price">$3.00</div></div></div>
+          <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Hot Chocolate</div><div class="menu-item-desc">With whipped cream</div></div><div class="menu-item-right"><div class="menu-price">$3.75</div></div></div>
+          <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Milk</div></div><div class="menu-item-right"><div class="menu-price">$2.65</div></div></div>
+          <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Apple Juice</div></div><div class="menu-item-right"><div class="menu-price">$3.75</div></div></div>
+          <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Orange Juice</div></div><div class="menu-item-right"><div class="menu-price">$3.75</div></div></div>
+          <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Soft Drinks</div></div><div class="menu-item-right"><div class="menu-price">$2.65</div></div></div>
+          <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Nestea</div></div><div class="menu-item-right"><div class="menu-price">$2.65</div></div></div>
+          <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Toast</div></div><div class="menu-item-right"><div class="menu-price">$3.25</div></div></div>
+          <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Raisin Toast</div></div><div class="menu-item-right"><div class="menu-price">$3.25</div></div></div>
+          <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Muffin</div></div><div class="menu-item-right"><div class="menu-price">$2.65</div></div></div>
+          <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Bagel</div></div><div class="menu-item-right"><div class="menu-price">$2.65</div></div></div>
+          <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Bagel with Cream Cheese</div></div><div class="menu-item-right"><div class="menu-price">$3.50</div></div></div>
+        </div>
+      </div>
+      <div class="menu-category">
+        <div class="menu-category-title"><span class="cat-icon">🍳</span> Breakfast</div>
+        <p class="menu-sub">Rye or Raisin Toast: $0.50 extra · Gluten Free Bread: $2.00 extra</p>
+        <div class="menu-items">
+          <div class="menu-item" style="grid-column: span 1;">
+            <div class="menu-item-left">
+              <div class="menu-item-name">Superior Hungry Man <span class="menu-item-tag">POPULAR</span></div>
+              <div class="menu-item-desc">3 eggs, 3 slices bacon, 2 pieces sausage and 1 slice ham, hash brown or potato cube and toast</div>
+            </div>
+            <div class="menu-item-right"><div class="menu-price">$16.50</div></div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-left">
+              <div class="menu-item-name">Breakfast Club</div>
+              <div class="menu-item-desc">Served with 2 eggs, mayonnaise, lettuce, tomato, bacon and French fries</div>
+            </div>
+            <div class="menu-item-right"><div class="menu-price">$16.50</div></div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-left">
+              <div class="menu-item-name">One Egg With Meat</div>
+              <div class="menu-item-desc">Served with hash brown or potato cube, toast. Choice of: 3 slices bacon, 2 slices ham or 3 pieces sausage</div>
+            </div>
+            <div class="menu-item-right"><div class="menu-price">$8.50</div></div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-left">
+              <div class="menu-item-name">Two Eggs With Meat</div>
+              <div class="menu-item-desc">Served with hash brown or potato cube, toast. Choice of: 3 slices bacon, 2 slices ham or 3 pieces sausage</div>
+            </div>
+            <div class="menu-item-right"><div class="menu-price">$9.75</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- APPETIZERS & SANDWICHES -->
+    <div class="menu-section" id="appetizers">
+      <div class="menu-category">
+        <div class="menu-category-title"><span class="cat-icon">🥗</span> Appetizers &amp; Salads</div>
+        <div class="menu-items">
+          <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Chef's Salad</div></div><div class="menu-item-right"><div class="menu-price">$7.95</div></div></div>
+          <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Chef's Salad with Mozzarella Cheese</div></div><div class="menu-item-right"><div class="menu-price">$9.95</div></div></div>
+          <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Chef's Salad with Turkey</div></div><div class="menu-item-right"><div class="menu-price">$9.95</div></div></div>
+          <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Chef's Salad — Mozzarella &amp; Turkey</div></div><div class="menu-item-right"><div class="menu-price">$11.25</div></div></div>
+          <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Greek Salad</div></div><div class="menu-item-right"><div class="menu-price">$10.95</div></div></div>
+          <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Caesar Salad</div></div><div class="menu-item-right"><div class="menu-price">$10.95</div></div></div>
+          <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Caesar Salad with Turkey</div></div><div class="menu-item-right"><div class="menu-price">$13.25</div></div></div>
+          <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Mozzarella Cheese Sticks</div></div><div class="menu-item-right"><div class="menu-price">$11.95</div></div></div>
+          <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Zucchini Sticks</div></div><div class="menu-item-right"><div class="menu-price">$11.25</div></div></div>
+        </div>
+      </div>
+
+      <div class="menu-category">
+        <div class="menu-category-title"><span class="cat-icon">🥪</span> Three Decker Sandwiches</div>
+        <div class="menu-items">
+          <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">'Superior Special'</div><div class="menu-item-desc">Turkey Breast, Lettuce, Tomato, Cheese</div></div><div class="menu-item-right"><div class="menu-price">$15.50</div></div></div>
+          <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Club Sandwich</div><div class="menu-item-desc">Chicken Breast, Bacon, Lettuce, Tomato</div></div><div class="menu-item-right"><div class="menu-price">$15.50</div></div></div>
+          <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">California Sandwich</div><div class="menu-item-desc">Sliced Cooked Ham, Cheese, Lettuce, Tomato</div></div><div class="menu-item-right"><div class="menu-price">$15.50</div></div></div>
+        </div>
+      </div>
+
+      <div class="menu-category">
+        <div class="menu-category-title"><span class="cat-icon">🌭</span> Hot Sandwiches</div>
+        <div class="menu-items">
+          <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Hot Hamburg Platter</div></div><div class="menu-item-right"><div class="menu-price">$16.50</div></div></div>
+          <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Hot Chicken or Turkey Platter</div><div class="menu-item-desc">White Meat</div></div><div class="menu-item-right"><div class="menu-price">$16.50</div></div></div>
+          <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Hot Virginia Ham Platter</div></div><div class="menu-item-right"><div class="menu-price">$17.95</div></div></div>
+        </div>
+      </div>
+
+      <div class="menu-category">
+        <div class="menu-category-title"><span class="cat-icon">🍔</span> Burgers &amp; Fries</div>
+        <p class="menu-sub">Platters include Cole Slaw, Choice of Potato</p>
+        <div class="menu-items">
+          <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">French Fries</div></div><div class="menu-item-right"><div class="menu-price">$4.95</div></div></div>
+          <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">French Fries with Gravy</div></div><div class="menu-item-right"><div class="menu-price">$6.25</div></div></div>
+          <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Poutine</div></div><div class="menu-item-right"><div class="menu-price">$8.95</div></div></div>
+          <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Onion Rings</div></div><div class="menu-item-right"><div class="menu-price">$6.95</div></div></div>
+          <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Hot Dog</div></div><div class="menu-item-right"><div class="menu-price">$4.95</div></div></div>
+          <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Hamburger</div></div><div class="menu-item-right"><div class="price-table"><span>$5.75</span><span class="menu-price-small">Platter $10.70</span></div></div></div>
+          <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Cheese Burger</div></div><div class="menu-item-right"><div class="price-table"><span>$6.25</span><span class="menu-price-small">Platter $11.20</span></div></div></div>
+          <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Bacon Burger</div></div><div class="menu-item-right"><div class="price-table"><span>$6.75</span><span class="menu-price-small">Platter $11.70</span></div></div></div>
+          <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Bacon Cheese Burger</div></div><div class="menu-item-right"><div class="price-table"><span>$7.25</span><span class="menu-price-small">Platter $12.20</span></div></div></div>
+          <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Chicken Burger</div></div><div class="menu-item-right"><div class="price-table"><span>$5.75</span><span class="menu-price-small">Platter $10.70</span></div></div></div>
+          <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Smoked Meat</div></div><div class="menu-item-right"><div class="price-table"><span>$8.50</span><span class="menu-price-small">Platter $13.45</span></div></div></div>
+          <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Gravy</div></div><div class="menu-item-right"><div class="menu-price">$2.10</div></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PIZZA -->
+    <div class="menu-section" id="pizza">
+      <div class="menu-category">
+        <div class="menu-category-title"><span class="cat-icon">🍕</span> Home-made Pizza <span style="font-family:'Permanent Marker',cursive; color:var(--yellow); font-size:0.9rem; margin-left:8px;">"Best Pizza In Town"</span></div>
+        <p class="menu-sub">Fresh Dough · Home-made Pizza Sauce · Available: Pepperoni, Bacon, Ham, Ground Beef, Italian Sausage, Green Peppers, Hot Peppers, Olives, Tomatoes, Onions, Mushrooms, Pineapple</p>
+
+        <!-- Pricing table styled -->
+        <div style="overflow-x:auto; margin-bottom:1.5rem;">
+          <table style="width:100%; border-collapse:collapse; font-family:'Special Elite',cursive; font-size:0.9rem;">
+            <thead>
+              <tr style="background:var(--black); color:var(--yellow);">
+                <th style="padding:10px 14px; text-align:left; letter-spacing:2px;">Size / Type</th>
+                <th style="padding:10px 14px; text-align:center;">Small</th>
+                <th style="padding:10px 14px; text-align:center;">Medium</th>
+                <th style="padding:10px 14px; text-align:center;">Large</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="border-bottom:2px dashed rgba(0,0,0,0.1);"><td style="padding:10px 14px;">Plain</td><td style="padding:10px; text-align:center; color:var(--red);">$12.50</td><td style="padding:10px; text-align:center; color:var(--red);">$16.50</td><td style="padding:10px; text-align:center; color:var(--red);">$20.50</td></tr>
+              <tr style="border-bottom:2px dashed rgba(0,0,0,0.1); background:rgba(200,16,46,0.04);"><td style="padding:10px 14px;">One Ingredient</td><td style="padding:10px; text-align:center; color:var(--red);">$13.50</td><td style="padding:10px; text-align:center; color:var(--red);">$17.50</td><td style="padding:10px; text-align:center; color:var(--red);">$21.75</td></tr>
+              <tr style="border-bottom:2px dashed rgba(0,0,0,0.1);"><td style="padding:10px 14px;">Two Ingredients</td><td style="padding:10px; text-align:center; color:var(--red);">$14.00</td><td style="padding:10px; text-align:center; color:var(--red);">$18.50</td><td style="padding:10px; text-align:center; color:var(--red);">$23.75</td></tr>
+              <tr style="border-bottom:2px dashed rgba(0,0,0,0.1); background:rgba(200,16,46,0.04);"><td style="padding:10px 14px;">Three Ingredients</td><td style="padding:10px; text-align:center; color:var(--red);">$15.00</td><td style="padding:10px; text-align:center; color:var(--red);">$19.50</td><td style="padding:10px; text-align:center; color:var(--red);">$24.75</td></tr>
+              <tr style="border-bottom:2px dashed rgba(0,0,0,0.1);"><td style="padding:10px 14px;">Four Ingredients</td><td style="padding:10px; text-align:center; color:var(--red);">$15.50</td><td style="padding:10px; text-align:center; color:var(--red);">$20.50</td><td style="padding:10px; text-align:center; color:var(--red);">$26.75</td></tr>
+              <tr style="border-bottom:2px dashed rgba(0,0,0,0.1); background:rgba(200,16,46,0.04);"><td style="padding:10px 14px;"><strong>Combination</strong><br><span style="font-size:0.75rem; opacity:0.7;">Pepperoni, Mushrooms, Green Peppers</span></td><td style="padding:10px; text-align:center; color:var(--red);">$15.00</td><td style="padding:10px; text-align:center; color:var(--red);">$19.50</td><td style="padding:10px; text-align:center; color:var(--red);">$24.75</td></tr>
+              <tr style="border-bottom:2px dashed rgba(0,0,0,0.1);"><td style="padding:10px 14px;"><strong>Canadian</strong><br><span style="font-size:0.75rem; opacity:0.7;">Bacon, Pepperoni, Mushrooms</span></td><td style="padding:10px; text-align:center; color:var(--red);">—</td><td style="padding:10px; text-align:center; color:var(--red);">—</td><td style="padding:10px; text-align:center; color:var(--red);">$24.75</td></tr>
+              <tr style="border-bottom:2px dashed rgba(0,0,0,0.1); background:rgba(200,16,46,0.04);"><td style="padding:10px 14px;"><strong>Superior Special</strong><br><span style="font-size:0.75rem; opacity:0.7;">Bacon, Mushrooms, Green Peppers, Olives, Onions</span></td><td style="padding:10px; text-align:center; color:var(--red);">$16.50</td><td style="padding:10px; text-align:center; color:var(--red);">$20.95</td><td style="padding:10px; text-align:center; color:var(--red);">$26.95</td></tr>
+              <tr style="border-bottom:2px dashed rgba(0,0,0,0.1);"><td style="padding:10px 14px;"><strong>Meat Lovers</strong><br><span style="font-size:0.75rem; opacity:0.7;">Sausage, Pepperoni, Bacon, Ham</span></td><td style="padding:10px; text-align:center; color:var(--red);">$15.75</td><td style="padding:10px; text-align:center; color:var(--red);">$20.50</td><td style="padding:10px; text-align:center; color:var(--red);">$26.75</td></tr>
+              <tr style="background:rgba(200,16,46,0.04);"><td style="padding:10px 14px;">Extra Cheese</td><td style="padding:10px; text-align:center; color:var(--red);">$2.95</td><td style="padding:10px; text-align:center; color:var(--red);">$3.95</td><td style="padding:10px; text-align:center; color:var(--red);">$4.95</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ITALIAN -->
+    <div class="menu-section" id="italian">
+      <div class="menu-category">
+        <div class="menu-category-title"><span class="cat-icon">🍝</span> Italian Specialties</div>
+        <div class="menu-items">
+          <div class="menu-item">
+            <div class="menu-item-left">
+              <div class="menu-item-name">Chicken Parmigiana <span class="menu-item-tag">FAVOURITE</span></div>
+              <div class="menu-item-desc">An Italian-Canadian Pièce de Résistance — breaded chicken breast served with spaghetti, smothered in meat sauce</div>
+            </div>
+            <div class="menu-item-right"><div class="menu-price">$18.95</div></div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-left">
+              <div class="menu-item-name">Veal Cutlet Parmigiana</div>
+              <div class="menu-item-desc">An Italian-Canadian Pièce de Résistance — breaded veal cutlet served with spaghetti, smothered in meat sauce</div>
+            </div>
+            <div class="menu-item-right"><div class="menu-price">$18.95</div></div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-left">
+              <div class="menu-item-name">Home-Made Baked Lasagna</div>
+              <div class="menu-item-desc">A blend of mouth watering morsels &amp; noodles, combined with selected cheese, smothered in meat sauce</div>
+            </div>
+            <div class="menu-item-right"><div class="menu-price">$15.95</div></div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-left">
+              <div class="menu-item-name">Cannelloni</div>
+              <div class="menu-item-desc">An Italian Banquet — egg dough stuffed with pâté of beef, chicken, ham, selected cheese, smothered in meat sauce, served in a casserole dish</div>
+            </div>
+            <div class="menu-item-right"><div class="menu-price">$15.95</div></div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-left">
+              <div class="menu-item-name">Ravioli</div>
+              <div class="menu-item-desc">Square noodles stuffed with tender meat filling, smothered in meat sauce &amp; cheese</div>
+            </div>
+            <div class="menu-item-right"><div class="menu-price">$15.95</div></div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-left">
+              <div class="menu-item-name">Spaghetti with Meat Sauce</div>
+            </div>
+            <div class="menu-item-right"><div class="menu-price">$13.95</div></div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-left">
+              <div class="menu-item-name">Spaghetti with Meat Sauce &amp; Mushrooms</div>
+            </div>
+            <div class="menu-item-right"><div class="menu-price">$15.95</div></div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-left">
+              <div class="menu-item-name">Spaghetti Casserole</div>
+            </div>
+            <div class="menu-item-right"><div class="menu-price">$15.95</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- GRILL & MAINS -->
+    <div class="menu-section" id="grill">
+      <div class="menu-category">
+        <div class="menu-category-title"><span class="cat-icon">🥩</span> From the Grill</div>
+        <p class="menu-sub">Includes Cole Slaw, Vegetables, Choice of Potato</p>
+        <div class="menu-items">
+          <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Double Pork Chops</div></div><div class="menu-item-right"><div class="menu-price">$15.50</div></div></div>
+          <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Breaded Veal Cutlet</div></div><div class="menu-item-right"><div class="menu-price">$15.95</div></div></div>
+          <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Grilled Hamburger Steak</div></div><div class="menu-item-right"><div class="menu-price">$19.50</div></div></div>
+          <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Grilled Pure Pork Sausages</div></div><div class="menu-item-right"><div class="menu-price">$13.95</div></div></div>
+          <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Fried Baby Beef Liver</div></div><div class="menu-item-right"><div class="menu-price">$15.95</div></div></div>
+          <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Tender Sweet Ham Steak</div></div><div class="menu-item-right"><div class="menu-price">$15.95</div></div></div>
+          <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Mixed Grills</div></div><div class="menu-item-right"><div class="menu-price">$19.95</div></div></div>
+          <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Sirloin Steak</div></div><div class="menu-item-right"><div class="menu-price">$24.95</div></div></div>
+        </div>
+      </div>
+
+      <div class="menu-category">
+        <div class="menu-category-title"><span class="cat-icon">🫒</span> Greek Dishes</div>
+        <p class="menu-sub">Includes Greek Salad &amp; Rice</p>
+        <div class="menu-items">
+          <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Twin Pork Souvlaki</div></div><div class="menu-item-right"><div class="menu-price">$20.95</div></div></div>
+          <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Twin Chicken Brochette <span class="menu-item-tag">POPULAR</span></div></div><div class="menu-item-right"><div class="menu-price">$20.95</div></div></div>
+        </div>
+      </div>
+
+      <div class="menu-category">
+        <div class="menu-category-title"><span class="cat-icon">🐟</span> Seafood</div>
+        <div class="menu-items">
+          <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Seafood Platter</div></div><div class="menu-item-right"><div class="menu-price">$19.95</div></div></div>
+          <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Fried Filet of Sole</div></div><div class="menu-item-right"><div class="menu-price">$16.95</div></div></div>
+          <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Jumbo Fried Shrimps</div></div><div class="menu-item-right"><div class="menu-price">$16.95</div></div></div>
+          <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">English Style Fish &amp; Chips <span class="menu-item-tag">CLASSIC</span></div></div><div class="menu-item-right"><div class="menu-price">$15.50</div></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CHICKEN -->
+    <div class="menu-section" id="chicken">
+      <div class="menu-category">
+        <div class="menu-category-title"><span class="cat-icon">🍗</span> Flavour-Crisp Chicken</div>
+        <div class="menu-items">
+          <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Chicken Fingers <span class="menu-item-tag">WITH PLUM SAUCE</span></div></div><div class="menu-item-right"><div class="menu-price">$14.95</div></div></div>
+          <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">No. 1 — 2 Pieces Flavour-Crisp Chicken</div></div><div class="menu-item-right"><div class="menu-price">$10.50</div></div></div>
+          <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">No. 2 — 3 Pieces Flavour-Crisp Chicken</div></div><div class="menu-item-right"><div class="menu-price">$13.95</div></div></div>
+          <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">No. 3 — 4 Pieces Flavour-Crisp Chicken</div></div><div class="menu-item-right"><div class="menu-price">$15.95</div></div></div>
+        </div>
+        <p class="menu-sub" style="margin-top:1.5rem;">#4, 5, 6 — Chicken Only</p>
+        <div class="menu-items">
+          <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">No. 4 — Special Deal: 10 Pieces <span class="menu-item-tag">GREAT VALUE</span></div></div><div class="menu-item-right"><div class="menu-price">$26.95</div></div></div>
+          <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">No. 5 — Enough for the Whole Family: 14 Pieces</div></div><div class="menu-item-right"><div class="menu-price">$31.95</div></div></div>
+          <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">No. 6 — Ideal for Your Party: 21 Pieces</div></div><div class="menu-item-right"><div class="menu-price">$42.95</div></div></div>
+        </div>
+      </div>
+    </div>
+
+    <p class="menu-note">★ Prices may vary. Ask your server for today's specials and current pricing. Take-out orders welcome — call (613) 256-3954.</p>
+  </div>
+</section>
+<div class="checker"></div>
+
+<!-- REVIEWS -->
+<section id="reviews">
+  <div class="section-inner">
+    <p class="section-label">What People Are Saying</p>
+    <h2 class="section-title">Guest Reviews</h2>
+    <div class="rating-overall">
+      <div class="rating-number">3.9 / 5</div>
+      <div class="rating-stars">★★★★☆</div>
+      <div class="rating-sub">Based on 300+ reviews across platforms</div>
+    </div>
+    <div class="reviews-grid">
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">The Superior has been part of our family history for over 50 years. We stop in every time we pass through Almonte heading to the cottage. Consistent quality food at a decent price — paper placemats with local businesses and friendly service every single time.</p>
+        <div class="review-author">— Family Tradition</div>
+        <div class="review-source">TripAdvisor</div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">50s era decor, lots of Elvis, and genuinely friendly small-town service. Their coffee was REALLY GOOD! Club Sandwich was delicious — loads of chicken and bacon, fries were perfect, crispy outside, soft inside. Highly recommend if you're visiting Almonte!</p>
+        <div class="review-author">— Local Explorer</div>
+        <div class="review-source">Restaurant Guru</div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">Stopped in for brunch after a morning in Carleton Place. Nostalgic charm, warm service — big shoutout to Dave! Two-egg breakfast with crispy hash browns and coffee in a quirky cat mug. My friends had the turkey club with generous portions. A great spot.</p>
+        <div class="review-author">— Brunch Visitor</div>
+        <div class="review-source">Restaurant Guru</div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">Five stars — not because it's fancy, but because it deserves them for being exactly what it is. Classic diner feel, killer food, amazing portions, decent prices. This is what a real diner looks like. Nothing more, nothing less.</p>
+        <div class="review-author">— Diner Enthusiast</div>
+        <div class="review-source">Various</div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★☆</div>
+        <p class="review-text">Had the Chicken Parmigiana and Bacon Cheese Burger Platter — so much food! Great value. Service was friendly and unhurried, exactly what you want on a lazy Saturday. Will definitely be back for the fried chicken.</p>
+        <div class="review-author">— Weekend Regular</div>
+        <div class="review-source">Various</div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★☆</div>
+        <p class="review-text">Old-style diner with booths, tables and a counter. Nothing fancy, food is good, prices are reasonable, and service is genuinely friendly. Go for breakfast — served all day. The hot chicken sandwich is a standout. Won't break the bank.</p>
+        <div class="review-author">— Regular</div>
+        <div class="review-source">MenuList</div>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="checker"></div>
+
+<!-- HOURS & CONTACT -->
+<section id="contact">
+  <div class="section-inner">
+    <p class="section-label">Find Us</p>
+    <h2 class="section-title">Hours &amp; Contact</h2>
+    <div class="contact-grid">
+      <!-- LEFT: Hours -->
+      <div>
+        <h3 style="font-family:'Abril Fatface',serif; font-size:1.2rem; margin-bottom:0.8rem;">Opening Hours</h3>
+        <table class="hours-table">
+          <tr><td>Monday</td><td>8:00 am – 8:00 pm</td></tr>
+          <tr><td>Tuesday</td><td>8:00 am – 9:00 pm</td></tr>
+          <tr><td>Wednesday</td><td>8:00 am – 9:00 pm</td></tr>
+          <tr><td>Thursday</td><td>8:00 am – 9:00 pm</td></tr>
+          <tr><td>Friday</td><td>8:00 am – 9:00 pm</td></tr>
+          <tr><td>Saturday</td><td>8:00 am – 9:00 pm</td></tr>
+          <tr><td>Sunday</td><td>Call for hours</td></tr>
+        </table>
+        <p style="margin-top:0.9rem; font-family:'Special Elite',cursive; font-size:0.78rem; color:var(--brown); opacity:0.65;">★ Hours may vary on holidays — call ahead to confirm.</p>
+      </div>
+      <!-- RIGHT: Contact + centered map box -->
+      <div>
+        <h3 style="font-family:'Abril Fatface',serif; font-size:1.2rem; margin-bottom:0.8rem;">Get In Touch</h3>
+        <div class="contact-rows">
+          <div class="contact-row">
+            <span class="c-icon">📍</span>
+            <div class="c-detail">
+              <h4>Address</h4>
+              <p>84 Mill Street, Almonte, Ontario K0A 1A0</p>
+            </div>
+          </div>
+          <div class="contact-row">
+            <span class="c-icon">📞</span>
+            <div class="c-detail">
+              <h4>Phone / Take-Out</h4>
+              <a href="tel:+16132563954">(613) 256-3954</a> &nbsp;·&nbsp; <a href="tel:+16132562598">(613) 256-2598</a>
+            </div>
+          </div>
+          <div class="contact-row">
+            <span class="c-icon">🎉</span>
+            <div class="c-detail">
+              <h4>Banquet Facilities</h4>
+              <p>Available for private events — call us to book</p>
+            </div>
+          </div>
+          <div class="contact-row">
+            <span class="c-icon">♿</span>
+            <div class="c-detail">
+              <h4>Accessibility</h4>
+              <p>Wheelchair accessible · Wi-Fi · Credit cards accepted</p>
+            </div>
+          </div>
+        </div>
+        <!-- MAP BOX — centred -->
+        <div class="map-box">
+          <div class="pin">📍</div>
+          <div class="map-name">Superior Restaurant</div>
+          <div class="map-addr">84 Mill Street, Almonte, Ontario K0A 1A0</div>
+          <a href="https://maps.google.com/?q=Superior+Restaurant+84+Mill+St+Almonte+Ontario" target="_blank" rel="noopener">Open in Google Maps →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<div class="checker"></div>
+<footer>
+  <div class="footer-logo">SUPERIOR RESTAURANT</div>
+  <p>84 Mill Street · Almonte, Ontario K0A 1A0</p>
+  <p>(613) 256-3954 · (613) 256-2598</p>
+  <p style="margin-top:0.6rem; opacity:0.45;">Serving Almonte with pride for over 50 years ★</p>
+</footer>
+
+<script>
+  function showTab(id, btn) {
+    document.querySelectorAll('.menu-section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.menu-tab').forEach(b => b.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    btn.classList.add('active');
+  }
+  // Highlight today
+  const days = ['sunday','monday','tuesday','wednesday','thursday','friday','saturday'];
+  const today = days[new Date().getDay()];
+  document.querySelectorAll('.hours-table tr').forEach(row => {
+    if (row.cells[0] && row.cells[0].textContent.trim().toLowerCase() === today) {
+      row.classList.add('today');
+      row.cells[0].innerHTML += ' <span style="background:var(--red);color:white;font-size:0.6rem;padding:1px 5px;margin-left:5px;letter-spacing:1px;">TODAY</span>';
+    }
+  });
+</script>
+</body>
+</html>
